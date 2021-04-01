@@ -14,6 +14,11 @@ Objectives:
 time series for each trap?
     - wait for more lessons, see if got better way to model instead of individual model for each trap
 
+classification model with some temporal features
+
+
+choropleth
+
 
 EDA:
 explore data
