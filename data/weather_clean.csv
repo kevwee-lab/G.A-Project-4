@@ -1,4 +1,4 @@
-Date,Tmax,Tmin,Tavg,Depart,DewPoint,WetBulb,Heat,Cool,Sunrise,Sunset,CodeSum,PrecipTotal,StnPressure,SeaLevel,ResultSpeed,ResultDir,AvgSpeed
+date,tmax,tmin,tavg,depart,dewpoint,wetbulb,heat,cool,sunrise,sunset,codesum,preciptotal,stnpressure,sealevel,resultspeed,resultdir,avgspeed
 2007-05-01,83,51,67,14,51,56,0,2,448,1849,set(),0.0,29.14,29.82,2.2,26,9.4
 2007-05-02,59,42,51,-2,42,47,13,0,447,1850,"{'HZ', 'BR'}",0.0,29.41,30.08,13.15,3,13.4
 2007-05-03,66,47,57,3,40,49,8,0,446,1851,{'HZ'},0.0,29.42,30.12,12.3,6,12.55
