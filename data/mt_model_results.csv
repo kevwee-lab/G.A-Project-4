@@ -1,0 +1,5 @@
+,model,best_params,train_score,test_score,f1_score,roc_auc_score,tn,fp,fn,tp
+3,logreg,{'logreg__C': 1},0.9422,0.9418,0.0465,0.8572,1987,4,119,3
+4,ada,"{'ada__learning_rate': 0.1, 'ada__n_estimators': 1}",0.9426,0.9423,0.0,0.6133,1991,0,122,0
+5,gb,"{'gb__learning_rate': 0.1, 'gb__max_depth': 2, 'gb__n_estimators': 1}",0.9426,0.9423,0.0,0.7094,1991,0,122,0
+6,svc,{'svc__kernel': 'rbf'},0.9428,0.9418,0.016,0.6847,1989,2,121,1
