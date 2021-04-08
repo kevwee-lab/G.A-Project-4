@@ -1,13 +1,9 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) WNV Classification Modelling - Starter
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) WNV Classification Modelling
 
 ## Problem Statement
 
 In view of the recent epidemic in Windy City of Chicago state affecting the state population, we aim to build a classifier model to make predictions on the possibility of West Nile Virus occurence on various locations of interest, which could be used to aid the deployment of pesticides in the fight for public health and safety.The model would be build using collected data related to mosquito population from the surveillance and control system setup by Deparment of Public Health.
-In addition, a cost-benefit analysis would be conducted on the cost benefits for the use of pesticides as a response in managing the epidemic.
-
-It is known that there is no vaccine available for West Nile Virus currently as reported by Centers for Disease Control and Prevention (CDC), but yet around 20% of people who become infected with the virus develop symptoms ranging from a persistent fever, to serious neurological illnesses that can result in death. While there have been efforts in spraying pesticides in hope of killing the carriers of such virus, there has not been much success in eradicating this issue.
-
-The purpose of this project is to present to CDC members a classifier model that could be used to predict the possible occurence of the virus at a specific location, together with a cost-benefit analysis on the use of pesticides to help decision makers if the use of spraying pesticides would be cost beneficial to the community. 
+In addition, a cost-benefit analysis would be conducted on the cost benefits for the use of pesticides as a response in managing the epidemic. 
 
 ## Executive Summary
 
@@ -141,3 +137,41 @@ We considered the following 5 models throughout our process:
     - Constructs decision trees at training time and outputs the class that is the mode of the classes
 5. Extra Trees
     - Similar to Random Forest. However, the splits of the trees in the Random Forest are deterministic. It is random for extratrees
+    
+## Best Fit Model 
+
+
+| Method        | Features |         Classifier         | Train ROC-AUC   Score | Holdout ROC-AUC   Score |    F1    | Precision |  Recall  | Accuracy | Target (Avg of   ROC-AUC & Recall) |
+|---------------|----------|:--------------------------:|:---------------------:|:-----------------------:|:--------:|:---------:|:--------:|:--------:|:----------------------------------:|
+| SMOTE         | 49       | GradientBoostingClassifier | 0.958587              | 0.842473                | 0.282132 | 0.179641  | 0.656934 | 0.819898 | 0.749704                           |
+| SMOTE         | 49       | XGBClassifier              | 0.984198              | 0.847744                | 0.277154 | 0.186398  | 0.540146 | 0.848211 | 0.693945                           |
+| Filtering     | 938      | XGBClassifier              | 0.942442              | 0.855403                | 0.16     | 0.923077  | 0.087591 | 0.950452 | 0.471497                           |
+| Base Features | 49       | XGBClassifier              | 0.928438              | 0.870347                | 0.09589  | 0.777778  | 0.051095 | 0.948093 | 0.460721                           |
+| Base Features | 49       | GradientBoostingClassifier | 0.891929              | 0.869525                | 0.055944 | 0.666667  | 0.029197 | 0.946913 | 0.449361                           |
+| PCA           | 50 (PC)  | GradientBoostingClassifier | 0.907362              | 0.845655                | 0.054422 | 0.4       | 0.029197 | 0.94534  | 0.437426                           |
+| Filtering     | 816      | XGBClassifier              | 0.918562              | 0.857152                | 0.028369 | 0.5       | 0.014599 | 0.946127 | 0.435876                           |
+| PCA           | 50 (PC)  | RandomForestClassifier     | 0.940975              | 0.846118                | 0.028169 | 0.4       | 0.014599 | 0.945733 | 0.430359                           |
+
+
+We can see that the models fitted on SMOTED data have far better recall scores than the rest, which were probably affected heavily by the class imbalance. Although the accuracy scores were also lower, minimising false negatives is of greater importance to us. Ultimately, we selected the GradientBoost model which trained on SMOTE data.
+    
+## Conclusions
+
+<u>**Classification Model**</u>
+
+The final model we built was successful in answering our problem statement (predictions on the possibility of West Nile Virus occurence on various locations in Chicago). Unfortunately, this model does not directly achieve the bigger goal of eradicating the West Nile Virus from Chicago. Most of the features in the model are beyond our control (such as weather), so inference would not directly help in suggesting ways to eradicate the virus.
+
+However, this does not mean that the model is not helpful at all. We can utilise the model to improve existing efforts in eradicating the virus, such as spraying.
+
+<u>**Optimize Spraying Parameters**</u>
+
+Based on our findings above, we concluded that the current spraying efforts have not been very effective in controlling or eliminating the issue of West Nile Virus. In fact, [BeyondPesticides](https://www.beyondpesticides.org/resources/mosquitos-and-insect-borne-diseases/documents/the-truth-about-mosquitoes,-pesticides-and-west-nile-virus) also urges that spraying pesticides affects the public health and environment, in addition to not reducing WNV incidences. This is also supported by CDC, stating that spraying pesticides is usually the least efficient mosquito control technique [CDC](https://www.beyondpesticides.org/resources/mosquitos-and-insect-borne-diseases/documents/the-truth-about-mosquitoes,-pesticides-and-west-nile-virus).
+
+Nevertheless, it could be improved in terms of both cost effectiveness and efficacy by taking into account the factors below:
+
+1. Location
+    - Spraying can be targeted at locations where our model predicts to have a high probability of the occurence of the virus
+2. Time of year  
+    - Spraying efforts can be ramped up at the appropriate time of the year (July to August) to reduce mosquito population
+3. Spray and wind direction
+    - Research shows that spraying along and against the wind will incur different efficacy. However, this needs further research as this can be a topic on its own.
